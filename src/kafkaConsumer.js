@@ -1,5 +1,6 @@
 const Kafka = require('node-rdkafka');
 const crypto = require('crypto');
+const bcd = require('./utils/bcd');
 
 module.exports = function (app, options) {
   let counter = 0;
@@ -56,7 +57,7 @@ module.exports = function (app, options) {
 
     // 处理消费数据
     try {
-      let buffer
+      let buffer, decryptedDataBuffer;
       const data = JSON.parse(m.value.toString());
       if (typeof Buffer.from === 'function') {
         buffer = Buffer.from(data.body, 'base64');
@@ -64,8 +65,23 @@ module.exports = function (app, options) {
         buffer = new Buffer(data.body, 'base64');
       }
 
-      const vi = buffer.slice(0, 15);
+      const iv = buffer.slice(0, 16);
+      const aesKey = bcd.encode(options.appSecret);
 
+      let decipher = crypto.createDecipheriv('AES-128-CBC', aesKey, iv);
+      let decryptedData = decipher.update(buffer.slice(16), 'hex', 'utf8');
+      decryptedData += decipher.final('utf8');
+
+      console.log(decryptedData);
+      const rxData = JSON.parse(decryptedData).data
+
+      if (typeof Buffer.from === 'function') {
+        decryptedDataBuffer = Buffer.from(rxData, 'base64');
+      } else {
+        decryptedDataBuffer = new Buffer(rxData, 'base64');
+      }
+
+      app.ws.broadcast(decryptedDataBuffer, { prodId: decryptedData.prdId, devId: decryptedData.devId });
     } catch (e) {
       console.log(e);
     }

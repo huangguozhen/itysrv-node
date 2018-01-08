@@ -14,6 +14,16 @@ class KoaWebsocketServer {
     this.server.on('connection', this.onConnection.bind(this));
   }
 
+  broadcast(data, options) {
+    console.log(options)
+    this.server.clients.forEach(function each(client) {
+      console.log(client)
+      if (client.readyState === ws.OPEN) {
+        client.send(data);
+      }
+    });
+  };
+
   onConnection (ws, req) {
     const location = url.parse(req.url, true);
     const fn = co.wrap(compose(this.middleware));

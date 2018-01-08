@@ -22,10 +22,14 @@ app.use(proxy({
     match: /^\/api/
 }))
 
-// 创建Kafka消费者
-const consumer = createConsumer(app, config.kafka)
-//starting the consumer
-consumer.connect();
+try {
+  // 创建Kafka消费者
+  const consumer = createConsumer(app, config.kafka)
+  //starting the consumer
+  consumer.connect();
+} catch (e) {
+  console.log(e)
+}
 
 const server = app.listen(3000);
 console.log('listen 3000.')
