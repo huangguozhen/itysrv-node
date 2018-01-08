@@ -15,9 +15,7 @@ class KoaWebsocketServer {
   }
 
   broadcast(data, options) {
-    console.log(options)
     this.server.clients.forEach(function each(client) {
-      console.log(client)
       if (client.readyState === ws.OPEN) {
         client.send(data);
       }

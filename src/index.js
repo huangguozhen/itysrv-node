@@ -1,12 +1,17 @@
 const Koa = require('koa');
 const createConsumer = require('./kafkaConsumer');
 
-const request = require('./utils/apiClient');
 const config = require('./config');
 const websockify = require('./websocket');
 
 // 启动Websocket服务
 const app = websockify(new Koa());
+
+// 适应HTML但页面应用(SPA)
+const history = require('koa2-connect-history-api-fallback');
+app.use(history({
+  whiteList: ['/token', '/api']
+}))
 
 // http路由实现
 const router = require('./routes/index');

@@ -1,5 +1,6 @@
 const Router = require('koa-router');
 const crypto = require('crypto');
+const request = require('../utils/apiClient');
 const config = require('../config');
 
 const router = new Router();
