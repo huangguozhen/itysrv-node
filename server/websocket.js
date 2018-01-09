@@ -16,8 +16,12 @@ class KoaWebsocketServer {
 
   broadcast(data, options) {
     this.server.clients.forEach(function each(client) {
-      if (client.readyState === ws.OPEN) {
-        client.send(data);
+      try {
+        if (client.readyState === ws.OPEN) {
+          client.send(data);
+        }
+      } catch (err) {
+        console.log(err)
       }
     });
   };
@@ -35,7 +39,7 @@ class KoaWebsocketServer {
     ws.isAlive = true;
     ws.on('pong', function () { ws.isAlive = true; })
 
-    const interval = setInterval(() => {
+    setInterval(() => {
       this.server.clients.forEach(ws => {
         if (ws.isAlive === false) return ws.terminate();
 

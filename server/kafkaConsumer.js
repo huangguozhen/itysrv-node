@@ -26,6 +26,7 @@ module.exports = function (app, options) {
 
   // event log
   consumer.on('event.log', function(log) {
+    console.log('event log');
     console.log(log);
   });
 
@@ -57,7 +58,7 @@ module.exports = function (app, options) {
 
     // 处理消费数据
     try {
-      let buffer, decryptedDataBuffer;
+      let buffer;
       const data = JSON.parse(m.value.toString());
       if (typeof Buffer.from === 'function') {
         buffer = Buffer.from(data.body, 'base64');
@@ -72,16 +73,15 @@ module.exports = function (app, options) {
       let decryptedData = decipher.update(buffer.slice(16), 'hex', 'utf8');
       decryptedData += decipher.final('utf8');
 
+      // const rxData = JSON.parse(decryptedData).data
+      // if (typeof Buffer.from === 'function') {
+      //   decryptedDataBuffer = Buffer.from(rxData, 'base64');
+      // } else {
+      //   decryptedDataBuffer = new Buffer(rxData, 'base64');
+      // }
+
       console.log(decryptedData);
-      const rxData = JSON.parse(decryptedData).data
-
-      if (typeof Buffer.from === 'function') {
-        decryptedDataBuffer = Buffer.from(rxData, 'base64');
-      } else {
-        decryptedDataBuffer = new Buffer(rxData, 'base64');
-      }
-
-      app.ws.broadcast(decryptedDataBuffer, { prodId: decryptedData.prdId, devId: decryptedData.devId });
+      app.ws.broadcast(decryptedData);
     } catch (e) {
       console.log(e);
     }

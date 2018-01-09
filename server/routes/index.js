@@ -5,10 +5,6 @@ const config = require('../config');
 
 const router = new Router();
 
-router.get('/', (ctx, next) => {
-    ctx.body = '<h1>Hello, Guozhen Huang & Molmc!</h1>'
-})
-
 router.get('/token', async (ctx, next) => {
     const timestamp = Math.ceil((new Date()).getTime())
     const md5Hash = crypto.createHash('md5');
