@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const path = require('path');
 const createConsumer = require('./kafkaConsumer');
 
 const config = require('./config');
@@ -12,6 +13,11 @@ const history = require('koa2-connect-history-api-fallback');
 app.use(history({
   whiteList: ['/token', '/api']
 }))
+
+
+// 加载静态页面
+const static = require('koa-static');
+app.use(static(path.join(__dirname, '../client/public')));
 
 // http路由实现
 const router = require('./routes/index');
