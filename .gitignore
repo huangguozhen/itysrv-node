@@ -4,4 +4,4 @@
 node_modules
 
 client/*
-!client/build/*
+!client/build
