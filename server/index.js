@@ -17,7 +17,7 @@ app.use(history({
 
 // 加载静态页面
 const static = require('koa-static');
-app.use(static(path.join(__dirname, '../client/public')));
+app.use(static(path.join(__dirname, '../client/build')));
 
 // http路由实现
 const router = require('./routes/index');
