@@ -1,0 +1,8 @@
+[
+  {
+    "key": "/gateway",
+    "icon": "wifi",
+    "title": "网关管理",
+    "link": { "href": "/gateway" }
+  }
+]
