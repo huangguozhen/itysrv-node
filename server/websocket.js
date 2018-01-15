@@ -47,7 +47,7 @@ class KoaWebsocketServer {
         ws.isAlive = false;
         ws.ping(() => {});
       })
-    }, 30000);
+    }, 60000);
   }
 
   use (fn) {

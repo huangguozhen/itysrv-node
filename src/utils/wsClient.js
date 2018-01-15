@@ -45,9 +45,11 @@ export default class wsClient {
     console.log('_on_socket_open')
   }
 
-  _on_socket_close (...args) {
+  _on_socket_close (event) {
     console.log('_on_socket_close')
-    console.log(args)
+    this.connected = false;
+    this.socket = null
+    setTimeout(() => this.connect(), 5000)
   }
 
   _on_socket_error (error) {

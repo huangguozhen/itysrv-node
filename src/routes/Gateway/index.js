@@ -51,8 +51,7 @@ export class Gateway extends React.Component {
             return `${date.getFullYear()}/${padLeft(date.getMonth() + 1, 2, '0')}/${padLeft(date.getDay(), 2, '0')}`
           }} />
         <Table.Column title='实时数据' dataIndex='realtime' key='realtime' render={(text, record) => {
-          console.log(record)
-          return (<span style={{ color: record.hasBg ? '#00c6ff' : 'rgba(0,0,0, .65)' }}>{text}</span>)
+          return (<span ref='realtime' style={{ color: record.hasBg ? '#00c6ff' : 'rgba(0,0,0, .65)' }}>{text}</span>)
         }} />
       </Table>)
     }

@@ -21,8 +21,8 @@ app.use(history({
 
 
 // 加载静态页面
-const static = require('koa-static');
-app.use(static(path.join(__dirname, '../client/build')));
+const serve = require('koa-static');
+app.use(serve(path.join(__dirname, '../build')));
 
 // http路由实现
 const router = require('./routes/index');
@@ -47,5 +47,5 @@ try {
   console.log(e)
 }
 
-const server = app.listen(3000);
+app.listen(3000);
 console.log('listen 3000.')
