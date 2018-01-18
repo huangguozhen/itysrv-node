@@ -1,3 +1,5 @@
+import io from 'socket.io-client'
+
 export const scope = function (f, scope) {
   return function () {
     return f.apply(scope, arguments)
@@ -23,13 +25,14 @@ export default class wsClient {
     }
 
     this.connected = false;
-    this.socket = new WebSocket(this.uri)
+    this.socket = io(this.uri)
 
-    this.binaryType = 'arraybuffer'
-    this.socket.onopen = scope(this._on_socket_open, this)
-    this.socket.onmessage = scope(this._on_socket_message, this)
-    this.socket.onerror = scope(this._on_socket_error, this)
-    this.socket.onclose = scope(this._on_socket_close, this)
+    this.socket.on('new connection', data => console.log(data))
+
+    this.socket.on('message', scope(this._on_socket_message, this))
+    this.socket.on('connect', scope(this._on_socket_open, this))
+    this.socket.on('error', scope(this._on_socket_error, this))
+    this.socket.on('disconnect', scope(this._on_socket_close, this))
   }
 
   send (data) {
@@ -41,25 +44,20 @@ export default class wsClient {
   }
 
   _on_socket_open () {
-    this.connected = true
     console.log('_on_socket_open')
   }
 
   _on_socket_close (event) {
     console.log('_on_socket_close')
-    this.connected = false;
-    this.socket = null
-    setTimeout(() => this.connect(), 5000)
   }
 
   _on_socket_error (error) {
+    console.log('_on_socket_error')
     console.error(error.data)
   }
 
-  _on_socket_message (event) {
-    const data = event.data
+  _on_socket_message (data) {
     console.log(data)
-
     this.onMessage(data)
   }
 }

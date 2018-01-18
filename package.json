@@ -22,8 +22,9 @@
     "react-scripts": "1.0.17",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "superagent": "^3.8.2",
-    "ws": "^3.3.3"
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
+    "superagent": "^3.8.2"
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",

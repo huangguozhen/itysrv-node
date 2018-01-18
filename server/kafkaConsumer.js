@@ -81,7 +81,7 @@ module.exports = function (app, options) {
       // }
 
       console.log(decryptedData);
-      app.ws.broadcast(decryptedData);
+      app.ws.sockets.emit('message', decryptedData);
     } catch (e) {
       console.log(e);
     }

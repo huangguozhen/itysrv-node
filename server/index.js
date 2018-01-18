@@ -4,9 +4,10 @@ const createConsumer = require('./kafkaConsumer');
 
 const config = require('./config');
 const websockify = require('./websocket');
+const app = new Koa();
 
 // 启动Websocket服务
-const app = websockify(new Koa());
+const server = websockify(app);
 
 // 捕获异常
 app.onFinished = (err, res) => {
@@ -47,5 +48,5 @@ try {
   console.log(e)
 }
 
-app.listen(3000);
+server.listen(3000);
 console.log('listen 3000.')
