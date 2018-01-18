@@ -59,8 +59,8 @@ npm install
 打开server/config.js，修改appId和appSecrect字段
 ```
 {
-  appId: '36466d0942eef9df6aadd01d0347ab45',      // 在IntoYun开发者平台申请的服务器授权ID。（修改为自己的服务器授权ID）
-  appSecret: '6be36b51bf1c29f0b8eed27bdb205b5f',  // 授权密钥。（修改为自己的服务器授权密钥）
+  appId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',      // 在IntoYun开发者平台申请的服务器授权ID。（修改为自己的服务器授权ID）
+  appSecret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',  // 授权密钥。（修改为自己的服务器授权密钥）
   version: 'v1',                                  // IntoYun提供的企业API接口版本，详细参考官网文档说明。默认为v1
   proxy: 'https://enterprise.intoyun.com',        // IntoYun企业API接口地址
   brokers: 'dps.intoyun.com:9092',                // IntoYun实时数据服务器
