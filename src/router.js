@@ -7,7 +7,7 @@ import wsClient from './utils/wsClient'
 import { fetch as fetchOne } from './models/product'
 import { decode } from './utils/protocol'
 
-const client = new wsClient(`ws://localhost:3000`, 'intoyun-demo-websocket')
+const client = new wsClient(`ws://${window.location.host}`, 'intoyun-demo-websocket')
 function routerConfig ({ history, app }) {
   const routes = [{
     path: '/',
