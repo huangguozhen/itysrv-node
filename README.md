@@ -1,7 +1,8 @@
 # IntoYun SaaS Demo
 
 ## 环境要求
-nodejs 8.6+
+- nodejs 8.6+
+- 支持Linux Mac OS，暂不支持Windows（不支持Windows原因是因为项目中引用到了`node-rdkafa`这个包在Windows编译不通过，如果你坚持要在Windows下使用，请参考[Blizzard/node-rdkafka](https://github.com/Blizzard/node-rdkafka)）。
 
 ## 安装NodeJS
 
