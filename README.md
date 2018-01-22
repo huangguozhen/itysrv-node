@@ -5,19 +5,6 @@ nodejs 8.6+
 
 ## 安装NodeJS
 
-### Windows 安装
-下载Nodejs安装包
-
-[[Windows 32位]](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x86.msi)&nbsp;&nbsp;[[Windows 64位]](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi)
-
-1. 下载完成后，双击“node-v8.9.4-x64.msi”，开始安装Node.js
-![安装向导](https://upload-images.jianshu.io/upload_images/2267589-131af95ee6ebc811.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/618)
-
-2. Node.js安装完成，可以先进行以下简单的测试安装是否成功了，在键盘按下【win+R】键，输入cmd，然后回车，打开cmd窗口。
-![控制台](https://upload-images.jianshu.io/upload_images/2267589-19531194e378a38a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/513)
-
-![命令行窗口](https://upload-images.jianshu.io/upload_images/2267589-2c9ced41baca7c1e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
-
 ### Linux 安装
 安装NodeJS 8.x版本
 ```
@@ -43,14 +30,14 @@ brew uninstall node
 brew install node
 ```
 
-### 运行Demo
+## 运行Demo
 
 1. 将npm源改为taobao源
 ```
-npm config set registry https://registry.npm.taobao.org
+npm config set registry=https://registry.npm.taobao.org
 ```
 
-2. 进入工程目录，安装项目依赖包
+2. 进入工程目录，安装项目依赖包。最后编译`node-rdkafka`会比较慢，请耐心等待命令退出。
 ```
 npm install
 ```
